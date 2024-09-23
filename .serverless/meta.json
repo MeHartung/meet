@@ -1,0 +1,20 @@
+{
+  "unknown": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.0",
+    "isWithinCompose": false,
+    "composeOrgName": null,
+    "composeServiceName": null,
+    "command": [],
+    "options": {
+      "version": true
+    },
+    "error": null,
+    "machineId": "5f09514ab514c0fcd050730c5c9241a8",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
