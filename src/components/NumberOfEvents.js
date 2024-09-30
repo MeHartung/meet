@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const NumberOfEvents = ({ currentNOE, setCurrentNOE, setErrorAlert }) => {
     const [number, setNumber] = useState(currentNOE);
@@ -9,7 +9,7 @@ const NumberOfEvents = ({ currentNOE, setCurrentNOE, setErrorAlert }) => {
         if (isNaN(value) || value <= 0) {
             setErrorAlert('Enter a valid number');
         } else if (value > 32) {
-            setErrorAlert('Only maximum of 32 is allowed');
+            setErrorAlert('Only a maximum of 32 is allowed');
         } else {
             setErrorAlert('');
             setCurrentNOE(value);
@@ -17,11 +17,11 @@ const NumberOfEvents = ({ currentNOE, setCurrentNOE, setErrorAlert }) => {
     };
 
     return (
-        <div id="number-of-events">
+        <div className="number-of-events">
             <label>
                 Number of Events:
                 <input
-                    type="text"
+                    type="number"
                     value={number}
                     onChange={handleInputChanged}
                     data-testid="numberOfEventsInput"

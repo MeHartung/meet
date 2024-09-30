@@ -1,38 +1,109 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+body {
+  background-color: #f4f4f9;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
 .App {
   text-align: center;
+  padding: 2% 5%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App * {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul {
+  padding: 0;
+  list-style: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+p {
+  margin: 5px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #888;
+  font-size: 14px;
+  line-height: 20px;
+  align-self: center;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.city {
+  width: 300px;
+}
+
+#city-search {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: auto;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.suggestions {
+  width: 300px;
+  position: absolute;
+  top: 45px;
+  z-index: 2;
+  align-self: center;
+  margin: 0;
+  font-size: 14px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.suggestions>li {
+  text-align: left;
+  padding: 10px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.suggestions>li:hover {
+  background-color: #dedede;
+}
+
+.event {
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 12px;
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color: #1c669e;
+}
+
+.number-of-events {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.error-alert {
+  color: #e74c3c;
+  font-weight: bold;
 }
