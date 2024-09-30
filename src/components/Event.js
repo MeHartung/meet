@@ -1,11 +1,3 @@
-// const Event = ({ event }) => {
-//     return (
-//         <li>{event.id}</li>
-//     );
-// }
-
-// export default Event;
-
 import { useState } from "react";
 
 const Event = ({ event }) => {
