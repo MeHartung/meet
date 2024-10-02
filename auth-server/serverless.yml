@@ -18,7 +18,18 @@ functions:
       - http:
           path: api/get-auth-url
           method: get
-          cors: true
+          cors:
+            origins:
+              - https://mehartung.github.io
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
+            allowCredentials: true
 
   getAccessToken:
     handler: handler.getAccessToken
@@ -26,7 +37,18 @@ functions:
       - http:
           path: api/token/{code}
           method: get
-          cors: true
+          cors:
+            origins:
+              - https://mehartung.github.io
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
+            allowCredentials: true
 
   getCalendarEvents:
     handler: handler.getCalendarEvents
@@ -34,4 +56,15 @@ functions:
       - http:
           path: api/get-events/{access_token}
           method: get
-          cors: true
+          cors:
+            origins:
+              - https://mehartung.github.io
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
+            allowCredentials: true
