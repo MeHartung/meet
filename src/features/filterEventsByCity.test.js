@@ -2,7 +2,7 @@ import { loadFeature, defineFeature } from 'jest-cucumber';
 import { render, within, waitFor } from '@testing-library/react';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
-import mockData from '../mock-data'; // Импортируйте mock данные напрямую
+import mockData from '../mock-data';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
@@ -12,7 +12,7 @@ defineFeature(feature, test => {
     let AppComponent;
 
     given('user hasn’t searched for any city', () => {
-      // Условие не требует действий
+
     });
 
     when('the user opens the app', () => {
@@ -25,7 +25,7 @@ defineFeature(feature, test => {
 
       await waitFor(() => {
         const EventListItems = within(EventListDOM).queryAllByRole('listitem');
-        expect(EventListItems.length).toBe(32); // Проверяем количество событий
+        expect(EventListItems.length).toBe(32);
       });
     });
   });
@@ -67,7 +67,7 @@ defineFeature(feature, test => {
 
     and('the list of suggested cities is showing', () => {
       const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem');
-      expect(suggestionListItems).toHaveLength(2); // Проверяем количество предложений
+      expect(suggestionListItems).toHaveLength(2);
     });
 
     when('the user selects a city (e.g., “Berlin, Germany”) from the list', async () => {
