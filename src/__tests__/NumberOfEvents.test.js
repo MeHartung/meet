@@ -1,9 +1,10 @@
-import NumberOfEvents from '../components/NumberOfEvents';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import NumberOfEvents from '../components/NumberOfEvents';
 
 describe('<NumberOfEvents /> Component', () => {
     let NumberOfEventsComponent;
+
     beforeEach(() => {
         NumberOfEventsComponent = render(
             <NumberOfEvents
@@ -15,19 +16,20 @@ describe('<NumberOfEvents /> Component', () => {
     });
 
     test('component contains input textbox', () => {
-        const input = NumberOfEventsComponent.queryByRole('textbox');
+        const input = NumberOfEventsComponent.getByRole('spinbutton');
         expect(input).toBeInTheDocument();
     });
 
     test('ensures the default value of textbox is 32', () => {
-        const input = NumberOfEventsComponent.queryByRole('textbox');
-        expect(input).toHaveValue('32');
+        const input = NumberOfEventsComponent.getByRole('spinbutton');
+        expect(input.value).toBe('32');
     });
 
     test('textbox value changes when user updates input', async () => {
-        const input = NumberOfEventsComponent.getByTestId('numberOfEventsInput');
+        const input = NumberOfEventsComponent.getByRole('spinbutton');
         const user = userEvent.setup();
-        await user.type(input, '{backspace}{backspace}10');
-        expect(input).toHaveValue('10');
+        await user.clear(input);
+        await user.type(input, '10');
+        expect(input.value).toBe('10');
     });
 });

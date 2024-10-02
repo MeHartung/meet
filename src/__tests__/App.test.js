@@ -19,7 +19,7 @@ describe('<App /> component', () => {
     });
 
     test('renders NumberOfEvents', () => {
-        expect(AppDOM.querySelector('#number-of-events')).toBeInTheDocument();
+        expect(AppDOM.querySelector('.number-of-events')).toBeInTheDocument();
     });
 });
 
@@ -30,21 +30,21 @@ describe('<App /> integration', () => {
         const AppDOM = AppComponent.container.firstChild;
 
         const CitySearchDOM = AppDOM.querySelector('#city-search');
-        const CitySearchInput = within(CitySearchDOM).queryByRole('textbox');
+        const CitySearchInput = within(CitySearchDOM).getByRole('textbox');
 
-        await user.type(CitySearchInput, "Berlin");
-        const berlinSuggestionItem = within(CitySearchDOM).queryByText('Berlin, Germany');
+        await user.type(CitySearchInput, 'Berlin');
+        const berlinSuggestionItem = within(CitySearchDOM).getByText('Berlin, Germany');
         await user.click(berlinSuggestionItem);
 
         const EventListDOM = AppDOM.querySelector('#event-list');
-        const allRenderedEventItems = within(EventListDOM).queryAllByRole('listitem');
+        const allRenderedEventItems = within(EventListDOM).getAllByRole('listitem');
 
         const allEvents = await getEvents();
         const berlinEvents = allEvents.filter(event => event.location === 'Berlin, Germany');
         expect(allRenderedEventItems.length).toBe(berlinEvents.length);
 
         allRenderedEventItems.forEach(event => {
-            expect(event.textContent).toContain("Berlin, Germany");
+            expect(event.textContent).toContain('Berlin, Germany');
         });
     });
 
@@ -53,13 +53,14 @@ describe('<App /> integration', () => {
         const AppComponent = render(<App />);
         const AppDOM = AppComponent.container.firstChild;
 
-        const NumberOfEventsDOM = AppDOM.querySelector('#number-of-events');
-        const NumberOfEventsInput = within(NumberOfEventsDOM).queryByTestId('numberOfEventsInput');
+        const NumberOfEventsDOM = AppDOM.querySelector('.number-of-events');
+        const NumberOfEventsInput = within(NumberOfEventsDOM).getByTestId('numberOfEventsInput');
 
-        await user.type(NumberOfEventsInput, '{backspace}{backspace}10');
+        await user.clear(NumberOfEventsInput);
+        await user.type(NumberOfEventsInput, '10');
 
         const EventListDOM = AppDOM.querySelector('#event-list');
-        const allRenderedEventItems = within(EventListDOM).queryAllByRole('listitem');
+        const allRenderedEventItems = within(EventListDOM).getAllByRole('listitem');
         expect(allRenderedEventItems.length).toBe(10);
     });
 });
