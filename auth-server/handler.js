@@ -25,6 +25,8 @@ module.exports.getAuthURL = async () => {
     headers: {
       'Access-Control-Allow-Origin': 'https://mehartung.github.io',
       'Access-Control-Allow-Credentials': true,
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
     },
     body: JSON.stringify({
       authUrl,
@@ -49,6 +51,8 @@ module.exports.getAccessToken = async (event) => {
         headers: {
           'Access-Control-Allow-Origin': 'https://mehartung.github.io',
           'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
         },
         body: JSON.stringify(results),
       };
@@ -59,6 +63,8 @@ module.exports.getAccessToken = async (event) => {
         headers: {
           'Access-Control-Allow-Origin': 'https://mehartung.github.io',
           'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
         },
         body: JSON.stringify(error),
       };
@@ -94,6 +100,8 @@ module.exports.getCalendarEvents = async (event) => {
         headers: {
           'Access-Control-Allow-Origin': 'https://mehartung.github.io',
           'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
         },
         body: JSON.stringify({ events: results.data.items }),
       };
@@ -104,6 +112,8 @@ module.exports.getCalendarEvents = async (event) => {
         headers: {
           'Access-Control-Allow-Origin': 'https://mehartung.github.io',
           'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
         },
         body: JSON.stringify(error),
       };
