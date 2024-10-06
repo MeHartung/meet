@@ -2,7 +2,7 @@
 
 const { google } = require("googleapis");
 const calendar = google.calendar("v3");
-const SCOPES = ["https://www.googleapis.com/auth/calendar.events.public.readonly"];
+const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 const { CLIENT_SECRET, CLIENT_ID, CALENDAR_ID } = process.env;
 const redirect_uris = [
   "https://mehartung.github.io/meet/"
@@ -22,10 +22,10 @@ module.exports.getAuthURL = async (event) => {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': 'https://mehartung.github.io',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': true,
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
+        /*  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'*/
       },
     };
   }
@@ -39,11 +39,12 @@ module.exports.getAuthURL = async (event) => {
 
   return {
     statusCode: 200,
+    mode: 'no-cors',
     headers: {
-      'Access-Control-Allow-Origin': 'https://mehartung.github.io',
+      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
+      /*'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'*/
     },
     body: JSON.stringify({
       authUrl,
@@ -71,10 +72,8 @@ module.exports.getAccessToken = async (event) => {
       return {
         statusCode: 200,
         headers: {
-          'Access-Control-Allow-Origin': 'https://mehartung.github.io',
-          'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true
         },
         body: JSON.stringify(results),
       };
@@ -82,13 +81,7 @@ module.exports.getAccessToken = async (event) => {
     .catch((error) => {
       return {
         statusCode: 500,
-        headers: {
-          'Access-Control-Allow-Origin': 'https://mehartung.github.io',
-          'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
-        },
-        body: JSON.stringify(error),
+        body: JSON.stringify(error)
       };
     });
 };
@@ -125,10 +118,8 @@ module.exports.getCalendarEvents = async (event) => {
       return {
         statusCode: 200,
         headers: {
-          'Access-Control-Allow-Origin': 'https://mehartung.github.io',
-          'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true
         },
         body: JSON.stringify({ events: results.data.items }),
       };
@@ -137,10 +128,7 @@ module.exports.getCalendarEvents = async (event) => {
       return {
         statusCode: 500,
         headers: {
-          'Access-Control-Allow-Origin': 'https://mehartung.github.io',
-          'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token'
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(error),
       };

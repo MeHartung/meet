@@ -51,8 +51,15 @@ export const getAccessToken = async () => {
         const code = await searchParams.get("code");
         if (!code) {
             const response = await fetch(
-                "https://6zg9258ogh.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url"
+                "https://6zg9258ogh.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url",
+                {
+                    method: 'GET',
+                    mode: 'no-cors'
+                }
             );
+
+
+            console.log('respone: ', response);
             const result = await response.json();
             const { authUrl } = result;
             return (window.location.href = authUrl);
