@@ -15,7 +15,10 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 
 module.exports.getAuthURL = async (event) => {
+  console.log('Received event:', JSON.stringify(event, null, 2)); // Лог запроса
+
   if (event.httpMethod === 'OPTIONS') {
+    console.log('Handling OPTIONS request'); // Лог обработки OPTIONS запроса
     return {
       statusCode: 200,
       headers: {
@@ -32,6 +35,8 @@ module.exports.getAuthURL = async (event) => {
     scope: SCOPES,
   });
 
+  console.log('Generated auth URL:', authUrl); // Лог сгенерированного URL для аутентификации
+
   return {
     statusCode: 200,
     headers: {
@@ -47,13 +52,18 @@ module.exports.getAuthURL = async (event) => {
 };
 
 module.exports.getAccessToken = async (event) => {
+  console.log('Received event for getAccessToken:', JSON.stringify(event, null, 2)); // Лог запроса
+
   const code = decodeURIComponent(`${event.pathParameters.code}`);
+  console.log('Decoded code:', code); // Лог декодированного кода
 
   return new Promise((resolve, reject) => {
     oAuth2Client.getToken(code, (error, response) => {
       if (error) {
+        console.error('Error retrieving access token:', error); // Лог ошибки
         return reject(error);
       }
+      console.log('Received access token:', response); // Лог полученного access token
       return resolve(response);
     });
   })
@@ -84,7 +94,10 @@ module.exports.getAccessToken = async (event) => {
 };
 
 module.exports.getCalendarEvents = async (event) => {
+  console.log('Received event for getCalendarEvents:', JSON.stringify(event, null, 2)); // Лог запроса
+
   const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
+  console.log('Decoded access_token:', access_token); // Лог декодированного access_token
 
   oAuth2Client.setCredentials({ access_token });
 
@@ -99,8 +112,10 @@ module.exports.getCalendarEvents = async (event) => {
       },
       (error, response) => {
         if (error) {
+          console.error('Error fetching calendar events:', error); // Лог ошибки
           reject(error);
         } else {
+          console.log('Fetched calendar events:', response.data.items); // Лог полученных событий
           resolve(response);
         }
       }
