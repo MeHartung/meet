@@ -1,4 +1,5 @@
 import mockData from './mock-data';
+import NProgress from 'nprogress';
 
 /**
  * This function extracts locations from the events array.
@@ -15,10 +16,15 @@ export const extractLocations = (events) => {
  * This function fetches events from the API or returns mock data when running locally.
  */
 export const getEvents = async () => {
-    if (window.location.href.startsWith("http://localhost")) {
-        return mockData;
+    // Проверяем, есть ли подключение к интернету
+    if (!navigator.onLine) {
+        const events = localStorage.getItem("lastEvents");
+        NProgress.done();
+        // Если данные в localStorage есть, возвращаем их, иначе — пустой массив
+        return events ? JSON.parse(events) : [];
     }
 
+    // Если интернет доступен, продолжаем с токеном
     const token = await getAccessToken();
 
     if (token) {
@@ -27,7 +33,11 @@ export const getEvents = async () => {
         try {
             const response = await fetch(url);
             const result = await response.json();
+
             if (result) {
+                NProgress.done();
+                // Сохраняем события в localStorage
+                localStorage.setItem("lastEvents", JSON.stringify(result.events));
                 return result.events;
             } else {
                 console.error('No events found in the response.');
