@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NumberOfEvents from '../components/NumberOfEvents';
 
@@ -13,6 +13,10 @@ describe('<NumberOfEvents /> Component', () => {
                 setErrorAlert={() => { }}
             />
         );
+    });
+
+    afterEach(() => {
+        cleanup();
     });
 
     test('component contains input textbox', () => {
@@ -34,8 +38,9 @@ describe('<NumberOfEvents /> Component', () => {
     });
 
     test('displays an error alert when the user enters an invalid number', async () => {
+        cleanup(); // Ensure previous components are cleaned up
         const setErrorAlert = jest.fn();
-        const { getAllByRole } = render(
+        const { getByRole } = render(
             <NumberOfEvents
                 currentNOE={32}
                 setCurrentNOE={() => { }}
@@ -43,10 +48,10 @@ describe('<NumberOfEvents /> Component', () => {
             />
         );
 
-        const inputs = getAllByRole('spinbutton');
+        const input = getByRole('spinbutton');
         const user = userEvent.setup();
-        await user.clear(inputs[0]);
-        await user.type(inputs[0], '-1');
+        await user.clear(input);
+        await user.type(input, '-1');
 
         expect(setErrorAlert).toHaveBeenCalledWith('Please enter a valid number');
     });
