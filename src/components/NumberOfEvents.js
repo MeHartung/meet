@@ -4,7 +4,7 @@ const NumberOfEvents = ({ currentNOE, setCurrentNOE, setErrorAlert }) => {
     const [number, setNumber] = useState(currentNOE);
 
     const handleInputChanged = (event) => {
-        const value = Number(event.target.value); // Приводим значение к числу
+        const value = Number(event.target.value);
         setNumber(value);
 
         if (isNaN(value) || value <= 0) {
