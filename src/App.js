@@ -4,7 +4,7 @@ import CitySearch from './components/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents';
 import { useEffect, useState } from 'react';
 import { extractLocations, getEvents } from './api';
-import { InfoAlert, ErrorAlert } from './components/Alert';
+import { InfoAlert, ErrorAlert, WarningAlert } from './components/Alert';
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -13,8 +13,14 @@ const App = () => {
   const [currentCity, setCurrentCity] = useState("See all cities");
   const [infoAlert, setInfoAlert] = useState("");
   const [errorAlert, setErrorAlert] = useState("");
+  const [warningAlert, setWarningAlert] = useState(""); // Новый state для предупреждения
 
   useEffect(() => {
+    if (navigator.onLine) {
+      setWarningAlert(""); // Если онлайн, очищаем предупреждение
+    } else {
+      setWarningAlert("You are offline. Events may not be up to date."); // Если оффлайн, показываем сообщение
+    }
     fetchData();
   }, [currentCity, currentNOE]);
 
@@ -33,6 +39,7 @@ const App = () => {
       <div className="alerts-container">
         {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
         {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
+        {warningAlert.length ? <WarningAlert text={warningAlert} /> : null} {/* Рендерим WarningAlert */}
       </div>
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
       <NumberOfEvents
