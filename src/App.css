@@ -107,3 +107,19 @@ input[type="number"] {
   color: #e74c3c;
   font-weight: bold;
 }
+
+/* Добавление стилей для контейнера диаграмм */
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  /* Промежуток между графиками */
+  margin: 20px 0;
+}
+
+/* Мобильный режим: диаграммы одна под другой */
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+}

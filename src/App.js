@@ -5,7 +5,8 @@ import NumberOfEvents from './components/NumberOfEvents';
 import { useEffect, useState } from 'react';
 import { extractLocations, getEvents } from './api';
 import { InfoAlert, ErrorAlert, WarningAlert } from './components/Alert';
-import CityEventsChart from './components/CityEventsChart';
+import CityEventsChart from './components/CityEventsChart';  // Scatterplot компонент
+import EventGenresChart from './components/EventGenresChart';  // Pie Chart компонент
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -48,7 +49,10 @@ const App = () => {
         setCurrentNOE={setCurrentNOE}
         setErrorAlert={setErrorAlert}
       />
-      <CityEventsChart allLocations={allLocations} events={events} />
+      <div className="charts-container"> {/* Контейнер для диаграмм */}
+        <CityEventsChart events={events} />
+        <EventGenresChart events={events} /> {/* Pie Chart */}
+      </div>
       <EventList events={events} />
     </div>
   );
