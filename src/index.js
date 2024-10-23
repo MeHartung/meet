@@ -6,8 +6,8 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import * as atatus from 'atatus-spa';
 
-// Инициализация Atatus
-atatus.config('a1e4b5335759440e9e2f447699f42701').install();
+// Инициализация Atatus с новой конфигурацией
+atatus.config('f56d5a98e2bb436ab7288c275143f858').install();
 
 // Создание корневого элемента
 const root = ReactDOM.createRoot(document.getElementById('root'));
