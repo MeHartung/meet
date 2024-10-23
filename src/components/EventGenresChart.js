@@ -1,25 +1,24 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts';
 
 const EventGenresChart = ({ events }) => {
     const [data, setData] = useState([]);
 
-    // Используем useMemo для запоминания массива genres
     const genres = useMemo(() => ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'], []);
 
+    const getData = () => {
+        return genres.map((genre) => {
+            const filteredEvents = events.filter((event) => event.summary.includes(genre));
+            return {
+                name: genre,
+                value: filteredEvents.length,
+            };
+        });
+    };
+
     useEffect(() => {
-        const getData = () => {
-            const data = genres.map((genre) => {
-                const filteredEvents = events.filter((event) => event.summary.includes(genre));
-                return {
-                    name: genre,
-                    value: filteredEvents.length,
-                };
-            });
-            return data;
-        };
         setData(getData());
-    }, [events, genres]); // genres больше не пересоздаётся при каждом рендере
+    }, [events, genres]);
 
     const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, percent, index }) => {
         const RADIAN = Math.PI / 180;

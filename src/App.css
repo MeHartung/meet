@@ -11,10 +11,6 @@ body {
   padding: 2% 5%;
 }
 
-.App * {
-  box-sizing: border-box;
-}
-
 ul {
   padding: 0;
   list-style: none;
@@ -32,8 +28,6 @@ input[type="number"] {
   border: 1px solid #888;
   font-size: 14px;
   line-height: 20px;
-  align-self: center;
-  height: 40px;
   margin-bottom: 20px;
 }
 
@@ -53,7 +47,6 @@ input[type="number"] {
   position: absolute;
   top: 45px;
   z-index: 2;
-  align-self: center;
   margin: 0;
   font-size: 14px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -91,16 +84,10 @@ input[type="number"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.details-btn:hover {
-  background-color: #1c669e;
 }
 
 .number-of-events {
   margin-top: 20px;
-  font-size: 16px;
 }
 
 .error-alert {
