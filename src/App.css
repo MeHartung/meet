@@ -113,7 +113,6 @@ input[type="number"] {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  /* Промежуток между графиками */
   margin: 20px 0;
 }
 
